@@ -1,0 +1,20 @@
+<html>
+    <head>
+        <script src="../node_modules/deepstream.io-client-js/dist/deepstream.js"></script>
+    </head>
+    <h1> A basic chat </h1>
+    <h2> records </h2>
+    <li id="list">
+
+    </li>
+    <input type="text" id="message" />
+    <input type="button" id="send" />
+    <input type="button" id="load" value="load"/>
+    <script type = "text/javascript">
+        let client = deepstream('localhost:6020').login();
+        let record = client.record.getRecord('messages');
+        record.set('list', message);
+        document.getElementById('list').appendChild(record.get()|| 'no records found')
+        client.events.emit('message', message);
+    </script>
+</html>
